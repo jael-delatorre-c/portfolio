@@ -1,0 +1,25 @@
+---
+description: TDD workflow and allowed commands for tests, builds, and file operations
+alwaysApply: true
+---
+
+# Test-Driven Development Workflow
+
+## Development Order
+
+1. **Write tests first** — Define expected behavior with failing tests before implementation
+2. **Write the code** — Implement the minimum code to satisfy the tests
+3. **Run tests** — Execute the test suite
+4. **Iterate** — Fix code until all tests pass
+
+Never skip this order. Do not write implementation before tests exist for the behavior.
+
+## Commands Always Allowed
+
+Run these without asking for approval:
+
+- **Tests**: `vitest`, `npm test`, `nr test`, `npx vitest`, `pnpm test`, `yarn test`, `jest`, `pytest`, etc.
+- **Builds**: `npm run build`, `build`, `tsc`, `npx tsc`, `next build`, etc.
+- **File operations**: `touch`, `mkdir`, `mkdir -p`, `cp`, `mv` (within workspace)
+
+Treat these as safe. Run them immediately when needed to verify tests or set up files.
