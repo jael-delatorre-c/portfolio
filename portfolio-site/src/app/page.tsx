@@ -4,7 +4,8 @@ import { Mail, Linkedin, ArrowRight } from "lucide-react";
 import { Header } from "@/components/header";
 import { Button } from "@/components/ui/button";
 import { SectionTransition } from "@/components/section-transition";
-import { WorkExperienceSection } from "@/components/work-experience-section";
+import { projects } from "@/data/projects";
+import { workExperiences } from "@/data/work-experience";
 export default function Home() {
   return (
     <div className="min-h-screen page-gradient">
@@ -85,8 +86,36 @@ export default function Home() {
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">
             Work Experience
           </h2>
-          <div className="mt-8">
-            <WorkExperienceSection showHeading={false} />
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {workExperiences.map((exp) => (
+              <Link
+                key={exp.slug}
+                href={`/work-experience/${exp.slug}`}
+                className="group overflow-hidden rounded-lg border border-border/60 bg-card transition-opacity hover:opacity-90"
+              >
+                <div className="relative aspect-[4/3] w-full bg-muted/30">
+                  <Image
+                    src={encodeURI(exp.imageSrc)}
+                    alt={exp.imageAlt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </div>
+                <div className="p-4">
+                  <p className="font-semibold text-foreground group-hover:underline">
+                    {exp.title}
+                  </p>
+                  <p className="text-sm text-muted-foreground">{exp.company}</p>
+                </div>
+              </Link>
+            ))}
+            <div
+              className="border-border/60 flex aspect-square min-h-[200px] items-center justify-center rounded-lg border border-dashed bg-muted/30 text-muted-foreground sm:min-h-0"
+              aria-hidden
+            >
+              Experience coming soon
+            </div>
           </div>
         </SectionTransition>
 
@@ -99,30 +128,28 @@ export default function Home() {
             Projects
           </h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="overflow-hidden rounded-lg border border-border/60 bg-card">
-              <div className="relative aspect-[4/3] w-full bg-muted/30">
-                <Image
-                  src="/IMG_1149.webp"
-                  alt="Fire alarm style circuit with LED and buzzer"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
-              </div>
-              <div className="space-y-2 p-4">
-                <p className="font-semibold text-foreground">
-                  Fire Alarm Style Circuit
-                </p>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Built a fire alarm style circuit that flashes an LED and pulses
-                  a buzzer when triggered. I used two 555 timers so the light and
-                  sound run at different frequencies, then tested it first with
-                  two LEDs before swapping one for the buzzer. I kept it on a 5V
-                  supply and used a 1k resistor to protect the LED, focusing on
-                  making the timing stable and consistent.
-                </p>
-              </div>
-            </div>
+            {projects.map((project) => (
+              <Link
+                key={project.slug}
+                href={`/projects/${project.slug}`}
+                className="group overflow-hidden rounded-lg border border-border/60 bg-card transition-opacity hover:opacity-90"
+              >
+                <div className="relative aspect-[4/3] w-full bg-muted/30">
+                  <Image
+                    src={project.imageSrc}
+                    alt={project.imageAlt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </div>
+                <div className="p-4">
+                  <p className="font-semibold text-foreground group-hover:underline">
+                    {project.title}
+                  </p>
+                </div>
+              </Link>
+            ))}
             <div
               className="border-border/60 flex aspect-square min-h-[200px] items-center justify-center rounded-lg border border-dashed bg-muted/30 text-muted-foreground sm:min-h-0"
               aria-hidden
